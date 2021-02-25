@@ -79,13 +79,7 @@ class WebpackFontPreloadPlugin {
         // The `insertBeforeTag` is not present. Prepend to head itself.
         head.innerHTML = `${links}${head.innerHTML.trim()}`;
       } else {
-        const parent = insertBeforeTag.parentNode;
-        const newNodes = this.createNodeFromHtml(document, links);
-        if (newNodes && newNodes.length > 0) {
-          newNodes.forEach((n) => {
-            parent.insertBefore(n, insertBeforeTag);
-          });
-        }
+        insertBeforeTag.outerHTML = links + insertBeforeTag.outerHTML;
       }
       return parsed.serialize();
     }
